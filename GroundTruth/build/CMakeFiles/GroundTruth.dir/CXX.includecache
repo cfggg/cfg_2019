@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/emma/MyPass/GroundTruth/GroundTruth.cpp
+llvm/Pass.h
+/home/emma/MyPass/GroundTruth/llvm/Pass.h
+llvm/IR/Function.h
+/home/emma/MyPass/GroundTruth/llvm/IR/Function.h
+llvm/IR/Module.h
+/home/emma/MyPass/GroundTruth/llvm/IR/Module.h
+llvm/IR/BasicBlock.h
+/home/emma/MyPass/GroundTruth/llvm/IR/BasicBlock.h
+llvm/IR/Instruction.h
+/home/emma/MyPass/GroundTruth/llvm/IR/Instruction.h
+llvm/IR/Instructions.h
+/home/emma/MyPass/GroundTruth/llvm/IR/Instructions.h
+llvm/Support/raw_ostream.h
+/home/emma/MyPass/GroundTruth/llvm/Support/raw_ostream.h
+llvm/IR/DebugInfo.h
+/home/emma/MyPass/GroundTruth/llvm/IR/DebugInfo.h
+llvm/IR/DebugInfoMetadata.h
+/home/emma/MyPass/GroundTruth/llvm/IR/DebugInfoMetadata.h
+llvm/IR/CFG.h
+/home/emma/MyPass/GroundTruth/llvm/IR/CFG.h
+iostream
+-
+string
+-
+fstream
+-
+vector
+-
+algorithm
+-
+

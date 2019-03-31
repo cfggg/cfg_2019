@@ -1,0 +1,3 @@
+/home/emma/MyPass/GroundTruth/build/CMakeFiles/edit_cache.dir
+/home/emma/MyPass/GroundTruth/build/CMakeFiles/rebuild_cache.dir
+/home/emma/MyPass/GroundTruth/build/CMakeFiles/GroundTruth.dir
