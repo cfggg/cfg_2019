@@ -1,0 +1,12 @@
+function:f1
+basic_block:entry
+switch_line:8
+switch_block:6 7 8 
+function:main
+basic_block:entry
+switch_line:17
+switch_block:16 17 
+function:main
+basic_block:sw.epilog
+switch_line:28
+switch_block:26 27 28 
