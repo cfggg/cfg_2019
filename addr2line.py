@@ -19,8 +19,8 @@ def main():
 	file_dir['edge'] = os.listdir(rootdir+"/edge")
 	file_dir['addr'] = os.listdir(rootdir+"/addr")
 	file_dir['byte'] = os.listdir(rootdir+"/byte")
-	file_list = os.listdir(rootdir)
-	print(file_list)
+	#file_list = os.listdir(rootdir)
+	#print(file_list)
 	print(file_dir)
 	for f in file_dir['addr']:
 		addr = {}
