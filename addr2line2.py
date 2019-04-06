@@ -35,7 +35,7 @@ def find_bounds(addr,dir,num_of_blocks):
 	for id,(start,end) in addr.items():
 		if(find_bounds_nodes(start,end,dir)):
 			x,y = find_bounds_nodes(start,end,dir)
-			block_line[id] = (x,y)
+			block_line[id] = (str(x),str(y))
 	for id in addr.keys():
 		if(id not in block_line.keys()):
 			s_flag.append(id)
@@ -61,6 +61,7 @@ def find_bounds(addr,dir,num_of_blocks):
 
 def getLines(switch,des,block_bounds,dir):
 	lines = {}
+	des_lines = {}
 	print("switch:")
 	print(switch)
 	print("des:")
@@ -94,14 +95,14 @@ def getLines(switch,des,block_bounds,dir):
 				print("error occurred :",e.err)
 
 	for id,(x,y) in block_bounds.items():
-		if(str(x) in des and str(x) not in switch):
-			if(str(x) not in lines.keys()):
-				lines[str(x)]=id
+		if(str(x) in des):
+			if(str(x) not in des_lines.keys()):
+				des_lines[str(x)]=id
 			else:
-				lines[str(x)]=str(min(int(lines[str(x)]),int(id)))
+				des_lines[str(x)]=str(min(int(des_lines[str(x)]),int(id)))
 		else:
 			print("else in getLines:"+str(x)+" "+str(y))
-	return lines
+	return lines,des_lines
 
 def main():
 	#read addr files from directory
@@ -121,9 +122,10 @@ def main():
 	print("file_dir: ")
 	print(file_dir)
 	for f in file_dir['addr']:
-		addr= {}
-		block_line = {}
-		lines = {}
+		addr= {} # items:id,(x,y); id:block_id;(x,y)=(addrinhex1,addrinhex2) 
+		block_line = {} #items:id,(x,y); id:block_id;(x,y)=(startline,endline)
+		lines = {}#reflection of switch :items:line->block_id
+		des_lines = {}#reflection of destinations:items:line->block_id
 		num_of_blocks = -1
 		with open(rootdir+'/addr/'+f,"r") as a:
 			while(1):
@@ -143,20 +145,16 @@ def main():
 			print("start and end line of each basic block:")
 			print(block_line)
 			'''
-			print("f now :" )
-			print(f)
-			#print(f.split("_")[len(f.split("_"))-1])
-			print(f.replace("_"+f.split("_")[len(f.split("_"))-1],""))
 			block_line = find_bounds(addr,"addr2line -e ./ex_code/"+f.replace("_"+f.split("_")[len(f.split("_"))-1],""),num_of_blocks)
 			print("block line:")
 			print(block_line)
 			with open(rootdir+"/edge/"+f,"r") as e:
-				bb_did = []# edge format:(line_a,line_b) convert to (block_1,block_2)
-				bb_e = []
-				bb_sid = []
-				bb_line = []
-				did_line = []
-				did_id = []
+				bb_did = []#edge format:(line_a,line_b)
+				bb_e = []#edge format:(block_id_a,block_id_b)
+				bb_sid = []#block_Id_of_switchs
+				bb_line = []#line_number_of_switchs
+				did_line = [] #line_number_of_destinations
+				did_id = []#block_id_of_destinations
 				while(1):
 					line_e = e.readline()
 					if(line_e):
@@ -168,19 +166,19 @@ def main():
 						
 					else:
 						break
-				lines = getLines(bb_line,did_line,block_line,rootdir+"/table/"+f) 
+				lines,des_lines = getLines(bb_line,did_line,block_line,rootdir+"/table/"+f) 
 				print("reflection: ")
 				print(lines)
 				for x in bb_line:
 					bb_sid.append(lines[x])
 				for x in did_line:
-					did_id.append(lines[x])
+					did_id.append(des_lines[x])
 				print("switch block id: ")
 				print(bb_sid)	
 				print("des block id: ")
 				print(did_id)		
 				for (x,y) in bb_did:
-					bb_e.append((lines[x],lines[y]))
+					bb_e.append((lines[x],des_lines[y]))
 			print("edge block id: ")
 			print(bb_e)
 			# need bb_e,bb_sid		
