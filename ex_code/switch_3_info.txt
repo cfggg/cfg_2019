@@ -1,0 +1,8 @@
+function:main
+basic_block:entry
+switch_line:5
+switch_block:3 4 5 
+function:main
+basic_block:sw.bb3
+switch_line:8
+switch_block:8 
